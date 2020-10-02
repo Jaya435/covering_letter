@@ -26,9 +26,10 @@ Is this fails it is most likely due to the location of the pg_config file - spec
 PATH="/Library/PostgreSQL/13/bin/:$PATH"
 ```
 
-You will need a suitable database running in the background, in my case I used Postgresql 13. You will then need to create an inital database, first log into your terminal entry for your db:
+You will need a suitable database running in the background, in my case I used Postgresql 13. You will then need to create an inital database and test database, first log into your terminal entry for your db:
 ```
 CREATE DATABASE cl_api_db;
+CREATE DATABASE cl_api_test_db;
 ```
 There are then a few environment variables that need to be created:
 ```
@@ -53,6 +54,26 @@ python run.py
 ```
 
 The web application should now be running successfully, and you should be able to browse some information about me and my background.
+
+### Unit Tests
+
+There are 2 unit tests as well, to check the API is working as expected. First you will need to change the two environment vsriables
+```
+EXPORT DATABASE_TEST_URL=postgres://user:password@host:port/cl_api_test_db
+EXPORT FLASK_ENV=testing
+```
+Then run:
+```
+pytest src
+```
+And the two unit tests will run
+
+Additionally if you would like to, you can run
+
+```
+pytest --cov=src
+```
+to generate the test coverage report
 
 ## Authors
 
