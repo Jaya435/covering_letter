@@ -21,6 +21,11 @@ to install the required modules in said venv:
 ```
 pip install -r /path/to/requirements.txt
 ```
+Is this fails it is most likely due to the location of the pg_config file - specifcally, psycopg2 needs to know where the location of the postgresql binary folder is that contains the pg_config. In my case I had to add the location to my Path - 
+```
+PATH="/Library/PostgreSQL/13/bin/:$PATH"
+```
+
 You will need a suitable database running in the background, in my case I used Postgresql 13. You will then need to create an inital database, first log into your terminal entry for your db:
 ```
 CREATE DATABASE blog_api_db;
