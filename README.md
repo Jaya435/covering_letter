@@ -28,11 +28,11 @@ PATH="/Library/PostgreSQL/13/bin/:$PATH"
 
 You will need a suitable database running in the background, in my case I used Postgresql 13. You will then need to create an inital database, first log into your terminal entry for your db:
 ```
-CREATE DATABASE blog_api_db;
+CREATE DATABASE cl_api_db;
 ```
 There are then a few environment variables that need to be created:
 ```
-export DATABASE_URL=postgres://user:password@host:port/db_name
+export DATABASE_URL=postgres://user:password@host:port/cl_api_db
 export FLASK_ENV=development
 ```
 ### Installing
