@@ -4,7 +4,7 @@ import requests
 from .config import app_config
 from .models.__init import db, bcrypt
 from .views.UserView import user_api as user_blueprint
-from .views.SectionView import blogpost_api as blogpost_blueprint
+from .views.SectionView import section_api as section_blueprint
 import json
 import os
 
@@ -23,7 +23,7 @@ def create_app(env_name):
     db.init_app(app)
 
     app.register_blueprint(user_blueprint, url_prefix='/api/v1/users')
-    app.register_blueprint(blogpost_blueprint, url_prefix='/api/v1/blogposts')
+    app.register_blueprint(section_blueprint, url_prefix='/api/v1/sections')
 
     @app.route('/', methods=['GET'])
     def index():
@@ -43,19 +43,19 @@ def create_app(env_name):
 
     def add_record_to_db(filename):
         record = create_record(filename)
-        response = requests.post('http://localhost:5000/api/v1/blogposts/', json=record)
+        response = requests.post('http://localhost:5000/api/v1/sections/', json=record)
 
     def get_record_from_db():
-        response = requests.get('http://localhost:5000/api/v1/blogposts/')
+        response = requests.get('http://localhost:5000/api/v1/sections/')
         return response
 
     def load_information():
         data_directory = os.path.abspath('../resources')
-        response = requests.get('http://localhost:5000/api/v1/blogposts/')
+        response = requests.get('http://localhost:5000/api/v1/sections/')
         if response.status_code == 200:
             record = json.loads(response.text)
             for r in record:
-                requests.delete('http://localhost:5000/api/v1/blogposts/{}'.format(r['id']))
+                requests.delete('http://localhost:5000/api/v1/sections/{}'.format(r['id']))
         for file in os.listdir(data_directory):
             add_record_to_db(data_directory+'/'+file)
 

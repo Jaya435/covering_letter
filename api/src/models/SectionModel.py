@@ -6,10 +6,10 @@ from marshmallow import fields, Schema
 
 class SectionModel(db.Model):
     """
-    Blogpost Model
+    section Model
     """
 
-    __tablename__ = 'blogposts'
+    __tablename__ = 'sections'
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(128), nullable=False)
@@ -40,11 +40,11 @@ class SectionModel(db.Model):
         db.session.commit()
 
     @staticmethod
-    def get_all_blogposts():
+    def get_all_sections():
         return SectionModel.query.order_by('id').all()
 
     @staticmethod
-    def get_one_blogpost(id):
+    def get_one_section(id):
         return SectionModel.query.get(id)
 
     def __repr__(self):
@@ -52,7 +52,7 @@ class SectionModel(db.Model):
 
 class SectionSchema(Schema):
   """
-  Blogpost Schema
+  section Schema
   """
   id = fields.Int(dump_only=True)
   title = fields.Str(required=True)
